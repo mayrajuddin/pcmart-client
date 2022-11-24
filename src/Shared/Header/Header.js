@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { authContext } from '../../AuthContext/AuthProvider';
 
 const Header = () => {
+    const { logOut, user } = useContext(authContext)
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => {
+                console.log(err);
+            })
+    }
     const menuItems = <>
         <li><Link to="/" className='capitalize text-white hover:text-primary font-semibold rounded-md'>home</Link></li>
         <li><Link to="/about" className='capitalize text-white hover:text-primary font-semibold rounded-md'>about</Link></li>
         <li><Link to="/appointment" className='capitalize text-white hover:text-primary font-semibold rounded-md'>appointment</Link></li>
         <li><Link to="/blog" className='capitalize text-white hover:text-primary font-semibold rounded-md'>blog</Link></li>
         <li><Link to="/contact" className='capitalize text-white font-semibold hover:text-primary rounded-md'>contact us</Link></li>
-        <li><Link to="/login" className='capitalize text-white hover:text-primary font-semibold rounded-md'>login</Link></li>
+        {!user?.uid && <li><Link to="/login" className='capitalize text-white hover:text-primary font-semibold rounded-md'>login</Link></li>}
     </>
     return (
         <header className='bg-secondary '>
@@ -61,7 +70,7 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li><Link to='/'>Settings</Link></li>
-                            <li><Link to='/'>Logout</Link></li>
+                            <li><button type='button' onClick={handleLogOut}>Logout</button></li>
                         </ul>
                     </div>
                 </div>
