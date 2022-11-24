@@ -6,13 +6,13 @@ const Header = () => {
         <li><Link to="/" className='capitalize text-white hover:text-primary font-semibold rounded-md'>home</Link></li>
         <li><Link to="/about" className='capitalize text-white hover:text-primary font-semibold rounded-md'>about</Link></li>
         <li><Link to="/appointment" className='capitalize text-white hover:text-primary font-semibold rounded-md'>appointment</Link></li>
-        <li><Link to="/reviews" className='capitalize text-white hover:text-primary font-semibold rounded-md'>reviews</Link></li>
+        <li><Link to="/blog" className='capitalize text-white hover:text-primary font-semibold rounded-md'>blog</Link></li>
         <li><Link to="/contact" className='capitalize text-white font-semibold hover:text-primary rounded-md'>contact us</Link></li>
         <li><Link to="/login" className='capitalize text-white hover:text-primary font-semibold rounded-md'>login</Link></li>
     </>
     return (
-        <header>
-            <div className="navbar bg-secondary justify-between">
+        <header className='bg-secondary '>
+            <div className="navbar justify-between container mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
