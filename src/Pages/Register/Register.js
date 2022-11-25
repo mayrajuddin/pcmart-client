@@ -1,25 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { authContext } from '../../AuthContext/AuthProvider';
 
 const Register = () => {
     const { register, handleSubmit } = useForm()
-    const { createUser } = useContext(authContext)
+    const { createUser, updateUser } = useContext(authContext)
+    const [regError, setRegError] = useState('')
     const navigate = useNavigate()
 
     const handleRegister = data => {
-        const name = data.name
-        const email = data.email
-        const password = data.password
-
-        createUser(email, password)
+        setRegError('')
+        console.log(data.name);
+        createUser(data.email, data.password)
             .then(result => {
                 const user = result.user
+                toast('user create succesfully')
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(err => {
+                        console.log(err);
+                    })
                 navigate('/')
                 console.log(user);
             })
             .catch(err => {
+                setRegError(err.message)
                 console.log(err);
             })
     }
@@ -48,6 +58,7 @@ const Register = () => {
                                 </div>
                                 <input type="password" {...register('password', { required: true })} className="input focus:outline-none" placeholder='Password' />
                             </div>
+                            {regError && <p className="py-3">{regError}</p>}
                             <button type='submit' className='btn btn-secondary w-full mt-4 text-lg'>register</button>
                         </form>
                         <p className="text-center capitalize text-lg">new to Pcmart ? <Link to="/login" className=''><strong>register</strong></Link></p>
