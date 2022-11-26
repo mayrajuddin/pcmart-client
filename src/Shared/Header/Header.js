@@ -14,7 +14,7 @@ const Header = () => {
     const menuItems = <>
         <li><Link to="/" className='capitalize text-white hover:text-primary font-semibold rounded-md'>home</Link></li>
         <li><Link to="/about" className='capitalize text-white hover:text-primary font-semibold rounded-md'>about</Link></li>
-        <li><Link to="/appointment" className='capitalize text-white hover:text-primary font-semibold rounded-md'>appointment</Link></li>
+        <li><Link to="/addproduct" className='capitalize text-white hover:text-primary font-semibold rounded-md'>add product</Link></li>
         <li><Link to="/blog" className='capitalize text-white hover:text-primary font-semibold rounded-md'>blog</Link></li>
         <li><Link to="/dashboard" className='capitalize text-white font-semibold hover:text-primary rounded-md'>dashboard</Link></li>
         {!user?.uid && <li><Link to="/login" className='capitalize text-white hover:text-primary font-semibold rounded-md'>login</Link></li>}

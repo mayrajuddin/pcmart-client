@@ -3,13 +3,17 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { authContext } from '../../AuthContext/AuthProvider';
+import Spinner from '../../Components/Spinner/Spinner';
 
 const Register = () => {
     const { register, handleSubmit } = useForm()
-    const { createUser, updateUser } = useContext(authContext)
+    const { createUser, updateUser, loading } = useContext(authContext)
     const [regError, setRegError] = useState('')
     const navigate = useNavigate()
 
+    if (loading) {
+        return <Spinner />
+    }
     const handleRegister = data => {
         setRegError('')
         createUser(data.email, data.password)
@@ -33,7 +37,7 @@ const Register = () => {
     }
     const saveUser = (name, email) => {
         const user = { name, email }
-        fetch('http://localhost:8000/users', {
+        fetch(`${process.env.REACT_APP_API_URI}/users`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
