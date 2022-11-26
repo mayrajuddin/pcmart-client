@@ -16,7 +16,7 @@ const Header = () => {
         <li><Link to="/about" className='capitalize text-white hover:text-primary font-semibold rounded-md'>about</Link></li>
         <li><Link to="/appointment" className='capitalize text-white hover:text-primary font-semibold rounded-md'>appointment</Link></li>
         <li><Link to="/blog" className='capitalize text-white hover:text-primary font-semibold rounded-md'>blog</Link></li>
-        <li><Link to="/contact" className='capitalize text-white font-semibold hover:text-primary rounded-md'>contact us</Link></li>
+        <li><Link to="/dashboard" className='capitalize text-white font-semibold hover:text-primary rounded-md'>dashboard</Link></li>
         {!user?.uid && <li><Link to="/login" className='capitalize text-white hover:text-primary font-semibold rounded-md'>login</Link></li>}
     </>
     return (
@@ -59,10 +59,11 @@ const Header = () => {
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src="https://placeimg.com/80/80/people" alt='' />
+                                {user?.photoURL ? <img src={user?.photoURL} alt="" /> : <img src="https://placeimg.com/80/80/people" alt='' />}
                             </div>
                         </label>
-                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-secondary rounded-box w-52">
+                            {user?.displayName && <li><p>{user?.displayName}</p></li>}
                             <li>
                                 <Link to='/' className="justify-between">
                                     Profile

@@ -8,20 +8,17 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
     const createUser = (email, password) => {
-        loading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const loginUser = async (email, password) => {
-        loading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const updateUser = (userInfo) => {
-        return updateProfile(user, userInfo)
+    const updateUser = (info) => {
+        return updateProfile(auth.currentUser, info)
     }
     const logOut = () => {
-        loading(true)
         return signOut(auth)
     }
     useEffect(() => {

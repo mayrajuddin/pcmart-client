@@ -12,25 +12,38 @@ const Register = () => {
 
     const handleRegister = data => {
         setRegError('')
-        console.log(data.name);
         createUser(data.email, data.password)
             .then(result => {
-                const user = result.user
                 toast('user create succesfully')
                 const userInfo = {
                     displayName: data.name
                 }
                 updateUser(userInfo)
-                    .then(() => { })
+                    .then(() => {
+                        saveUser(data.name, data.email)
+                    })
                     .catch(err => {
                         console.log(err);
                     })
-                navigate('/')
-                console.log(user);
             })
             .catch(err => {
                 setRegError(err.message)
                 console.log(err);
+            })
+    }
+    const saveUser = (name, email) => {
+        const user = { name, email }
+        fetch('http://localhost:8000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                navigate('/')
             })
     }
     return (
