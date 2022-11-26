@@ -1,49 +1,106 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { authContext } from '../../AuthContext/AuthProvider';
 import Spinner from '../../Components/Spinner/Spinner';
 
 const AddProduct = () => {
+
+    const { data = [] } = useQuery({
+        queryKey: ['productCatagory'],
+        queryFn: () => fetch(`${process.env.REACT_APP_API_URI}/productCatagory`)
+            .then(res => res.json())
+    })
     const { loading } = useContext(authContext)
+    const { register, handleSubmit } = useForm()
+
     if (loading) {
         return <Spinner />
+    }
+
+    const handleProductForm = data => {
+        const name = data.name
+        const usesTime = data.usesTime
+        const location = data.location
+        const brand = data.brand
+        const image = data.image
+        const sellPrice = data.sellPrice
+        const officialPrice = data.officialPrice
+        const details = data.details
+        const product = {
+            name, usesTime, location, brand, image, sellPrice, officialPrice, details
+        }
+        fetch(`${process.env.REACT_APP_API_URI}/products`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('product added succesfully.', {
+                        style: {
+                            border: '1px solid #F8444A',
+                            padding: '16px',
+                            color: '#111827',
+                        },
+                        iconTheme: {
+                            primary: '#F8444A',
+                            secondary: '#fff',
+                        },
+                    });
+                }
+            })
     }
     return (
         <div>
             <section className="p-6  text-gray-50">
-                <form novalidate="" action="" className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleSubmit(handleProductForm)} className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
                     <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900">
                         <div className="space-y-2 col-span-full lg:col-span-1">
                             <p className="font-semibold text-xl text-center">Add your product</p>
                         </div>
                         <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                             <div className="col-span-full sm:col-span-3">
-                                <label for="firstname" className="text-sm">First name</label>
-                                <input id="firstname" type="text" placeholder="First name" className="w-full input rounded-md     focus:outline-none text-gray-900" />
+                                <label htmlFor="firstname" className="text-sm">Name</label>
+                                <input {...register('name')} name='name' id="firstname" type="text" placeholder="name" className="w-full input rounded-md focus:outline-none text-gray-900" />
                             </div>
                             <div className="col-span-full sm:col-span-3">
-                                <label for="lastname" className="text-sm">Last name</label>
-                                <input id="lastname" type="text" placeholder="Last name" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                                <label htmlFor="lastname" className="text-sm">Uses Time</label>
+                                <input {...register('usesTime')} id="lastname" type="text" placeholder="Uses Time" className="w-full input rounded-md focus:outline-none text-gray-900" />
                             </div>
                             <div className="col-span-full sm:col-span-3">
-                                <label for="email" className="text-sm">Email</label>
-                                <input id="email" type="email" placeholder="Email" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                                <label htmlFor="location" className="text-sm">Your Location</label>
+                                <input {...register('location')} id="location" type="text" placeholder="Your location" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                            </div>
+                            <div className="col-span-full sm:col-span-3">
+                                <label className="text-sm">Brand Name</label>
+                                <select {...register('brand')} className="select select-bordered w-full focus:outline-none text-gray-900">
+                                    {data.map(bName => (
+                                        <option key={bName._id} className='text-gray-900' value={bName.brandName}>{bName.brandName}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="col-span-full">
-                                <label for="address" className="text-sm">Address</label>
-                                <input id="address" type="text" placeholder="" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                                <label htmlFor="address" className="text-sm">Image URL</label>
+                                <input {...register('image')} id="address" type="text" placeholder="image URL" className="w-full input rounded-md focus:outline-none text-gray-900" />
                             </div>
-                            <div className="col-span-full sm:col-span-2">
-                                <label for="city" className="text-sm">City</label>
-                                <input id="city" type="text" placeholder="" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                            <div className="col-span-full sm:col-span-3">
+                                <label htmlFor="sell" className="text-sm">Sell Price</label>
+                                <input {...register('sellPrice')} id="sell" type="number" placeholder="Sell Price" className="w-full input rounded-md focus:outline-none text-gray-900" />
                             </div>
-                            <div className="col-span-full sm:col-span-2">
-                                <label for="state" className="text-sm">State / Province</label>
-                                <input id="state" type="text" placeholder="" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                            <div className="col-span-full sm:col-span-3">
+                                <label htmlFor="state" className="text-sm">Official Price</label>
+                                <input {...register('officialPrice')} id="state" type="number" placeholder="official Price" className="w-full input rounded-md focus:outline-none text-gray-900 " />
                             </div>
-                            <div className="col-span-full sm:col-span-2">
-                                <label for="zip" className="text-sm">ZIP / Postal</label>
-                                <input id="zip" type="text" placeholder="" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                            <div className="col-span-full">
+                                <textarea className="textarea w-full focus:outline-none" placeholder="Give me Details"></textarea>
                             </div>
+                            <button type='submit' className='btn btn-primary '>post</button>
                         </div>
                     </fieldset>
                 </form>

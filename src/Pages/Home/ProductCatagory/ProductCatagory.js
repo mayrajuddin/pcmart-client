@@ -1,24 +1,13 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
 const ProductCatagory = () => {
 
-    const catagory = [
-        {
-            id: 1,
-            brandName: 'asuss',
-            img: 'https://besthqwallpapers.com/Uploads/28-6-2019/97856/thumb2-asus-black-logo-creative-metal-grid-background-asus-logo-brands.jpg'
-        },
-        {
-            id: 2,
-            brandName: 'toshiba',
-            img: 'https://st.depositphotos.com/1057689/4949/i/450/depositphotos_49494171-stock-photo-toshiba-laptop-logo.jpg'
-        },
-        {
-            id: 3,
-            brandName: 'dell',
-            img: 'https://cdn.wallpapersafari.com/45/95/skRXLN.jpg'
-        }
-    ]
+    const { data: catagory = [] } = useQuery({
+        queryKey: ['productCatagory'],
+        queryFn: () => fetch(`${process.env.REACT_APP_API_URI}/productCatagory`)
+            .then(res => res.json())
+    })
     return (
         <div>
             <section className='py-8'>
@@ -27,7 +16,7 @@ const ProductCatagory = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 justify-center">
                         {
                             catagory.map(product => (
-                                <div key={product.id}
+                                <div key={product._id}
                                     className="card items-end  bg-base-100 shadow-xl image-full max-h-64 w-96 mx-auto sm:w-auto">
                                     <figure><img src={product.img} alt="Shoes" className='w-full max-h-64 ' /></figure>
                                     <div className="card-body items-center">

@@ -2,15 +2,21 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authContext } from '../../AuthContext/AuthProvider';
+import Spinner from '../../Components/Spinner/Spinner';
 
 const Login = () => {
     const { register, handleSubmit } = useForm()
-    const { loginUser } = useContext(authContext)
+    const { loginUser, loading } = useContext(authContext)
 
     const location = useLocation()
     const navigate = useNavigate()
 
     const from = location.state?.from?.pathname || '/'
+
+    if (loading) {
+        return <Spinner />
+    }
+
     const handleLogin = data => {
         const email = data.email
         const password = data.password

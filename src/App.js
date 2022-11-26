@@ -1,5 +1,5 @@
+import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import './App.css';
 import { router } from './Routes/Routes/Routes';
 
@@ -8,11 +8,10 @@ function App() {
   return (
     <div>
       <RouterProvider router={router} />
-      <ToastContainer
+
+      <Toaster
         position="top-center"
-        autoClose={3000}
-        closeOnClick
-        theme="light"
+        reverseOrder={false}
       />
     </div>
   );
