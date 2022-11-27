@@ -66,8 +66,8 @@ const AddProduct = () => {
                         </div>
                         <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                             <div className="col-span-full sm:col-span-3">
-                                <label htmlFor="firstname" className="text-sm">Name</label>
-                                <input {...register('name')} name='name' id="firstname" type="text" placeholder="name" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                                <label htmlFor="firstname" className="text-sm">Model Name</label>
+                                <input {...register('name')} name='name' id="firstname" type="text" placeholder="Model name" className="w-full input rounded-md focus:outline-none text-gray-900" />
                             </div>
                             <div className="col-span-full sm:col-span-3">
                                 <label htmlFor="lastname" className="text-sm">Uses Time</label>
@@ -98,9 +98,9 @@ const AddProduct = () => {
                                 <input {...register('officialPrice')} id="state" type="number" placeholder="official Price" className="w-full input rounded-md focus:outline-none text-gray-900 " />
                             </div>
                             <div className="col-span-full">
-                                <textarea className="textarea w-full focus:outline-none" placeholder="Give me Details"></textarea>
+                                <textarea className="textarea w-full focus:outline-none text-gray-900" placeholder="Give me Details"></textarea>
                             </div>
-                            <button type='submit' className='btn btn-primary '>post</button>
+                            <button type='submit' className='btn btn-primary hover:bg-white hover:text-secondary hover:border-white duration-700 ease-in font-semibold'>post</button>
                         </div>
                     </fieldset>
                 </form>
