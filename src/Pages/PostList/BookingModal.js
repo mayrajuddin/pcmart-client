@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { authContext } from '../../AuthContext/AuthProvider';
 
 const BookingModal = ({ selectProduct, setSeletProduct }) => {
-    const { name, sellPrice, location } = selectProduct
+    const { name, sellPrice, location, image } = selectProduct
     const { user } = useContext(authContext)
 
     const { register, handleSubmit } = useForm()
@@ -16,16 +16,19 @@ const BookingModal = ({ selectProduct, setSeletProduct }) => {
         const sellingPrice = sellPrice
         const pickupLocation = data.pickupLocation
         const buyerContact = data.buyerContact
+
         const ProductDetails = {
+            modelName: name,
             buyerName,
-            buyerEmail,
+            email: buyerEmail,
             sellerLocation,
             sellingPrice,
             pickupLocation,
             buyerContact,
+            image
         }
 
-        fetch(`${process.env.REACT_APP_API_URI}/sellProducts`, {
+        fetch(`${process.env.REACT_APP_API_URI}/bookings`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

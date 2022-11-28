@@ -3,12 +3,13 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/AddProduct/AddProduct";
 import Blog from "../../Pages/Blog/Blog";
-import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PostList from "../../Pages/PostList/PostList";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
 
             {
                 path: '/category/:id',
-                element: <PostList />,
+                element: <PrivateRoute><PostList /></PrivateRoute>,
                 loader: async ({ params }) => fetch(`http://localhost:8000/products/${params.id}`)
             }
         ]
@@ -49,7 +50,11 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Dashboard />
+                element: <MyOrders />
+            },
+            {
+                path: '/dashboard/alluser',
+                element: <AllUsers />
             }
         ]
 

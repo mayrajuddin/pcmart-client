@@ -1,10 +1,12 @@
 import React from 'react';
+import AllUsers from '../AllUsers/AllUsers';
+import MyOrders from '../MyOrders/MyOrders';
 
 const Dashboard = () => {
     return (
-        <div>
-            <h4 className="text-center font-bold text-4xl text-red-400">dashboard </h4>
-        </div>
+        <section className='p-5 '>
+
+        </section>
     );
 };
 

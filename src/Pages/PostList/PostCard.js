@@ -1,14 +1,14 @@
 import React from 'react';
 
 const PostCard = ({ post, setSeletProduct }) => {
-    const { brand, name, location, image, officialPrice, sellPrice, usesTime } = post
+    const { brand, name, location, image, officialPrice, sellPrice, usesTime, sellerName } = post
+    console.log(post);
 
     return (
         <div className="flex flex-col max-w-lg p-6 mx-auto space-y-6 overflow-hidden rounded-lg hover:shadow-lg bg-gray-900 text-gray-300">
             <div className="flex space-x-4">
-                <img alt="" src={image} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500 " />
                 <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-semibold">name here</p>
+                    <p className="text-sm font-semibold">Seller Name : {sellerName}</p>
                     <span className="text-xs dark:text-gray-400">4 hours ago</span>
                 </div>
             </div>

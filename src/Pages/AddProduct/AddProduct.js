@@ -6,19 +6,18 @@ import { authContext } from '../../AuthContext/AuthProvider';
 import Spinner from '../../Components/Spinner/Spinner';
 
 const AddProduct = () => {
-
     const { data = [] } = useQuery({
         queryKey: ['productCatagory'],
         queryFn: () => fetch(`${process.env.REACT_APP_API_URI}/productCatagory`)
             .then(res => res.json())
     })
-    const { loading } = useContext(authContext)
+    const { loading, user } = useContext(authContext)
     const { register, handleSubmit } = useForm()
 
     if (loading) {
         return <Spinner />
     }
-
+    console.log(user);
     const handleProductForm = data => {
         const name = data.name
         const usesTime = data.usesTime
@@ -28,8 +27,10 @@ const AddProduct = () => {
         const sellPrice = data.sellPrice
         const officialPrice = data.officialPrice
         const details = data.details
+        const sellerEmail = user.email
+        const sellerName = user.displayName
         const product = {
-            name, usesTime, location, brand, image, sellPrice, officialPrice, details
+            name, usesTime, location, brand, image, sellPrice, officialPrice, details, sellerEmail, sellerName
         }
         fetch(`${process.env.REACT_APP_API_URI}/products`, {
             method: 'POST',

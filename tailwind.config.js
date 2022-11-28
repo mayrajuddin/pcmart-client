@@ -13,7 +13,6 @@ module.exports = {
         temtheme: {
           primary: '#F84248',
           secondary: '#232830',
-          neutral: '#232323',
           ghost: '#969696'
         }
       }
