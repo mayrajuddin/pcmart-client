@@ -1,20 +1,30 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { authContext } from '../../AuthContext/AuthProvider';
 import Spinner from '../../Components/Spinner/Spinner';
 
+import { FaGoogle, } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+import useToken from '../../Hooks/useToken';
+
 const Register = () => {
     const { register, handleSubmit } = useForm()
-    const { createUser, updateUser, loading } = useContext(authContext)
+    const { createUser, updateUser, loading, googleUser } = useContext(authContext)
     const [regError, setRegError] = useState('')
     const navigate = useNavigate()
+    const [newUserEmail, setNewUserEmail] = useState('')
 
-    if (loading) {
-        return <Spinner />
+    const [token] = useToken(newUserEmail)
+
+    if (token) {
+        navigate('/')
     }
+
     const handleRegister = data => {
+        if (loading) {
+            return <Spinner />
+        }
         setRegError('')
         createUser(data.email, data.password)
             .then(result => {
@@ -24,7 +34,7 @@ const Register = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        saveUser(data.name, data.email)
+                        saveUser(data.name, data.email, data.role)
                     })
                     .catch(err => {
                         console.log(err);
@@ -32,11 +42,19 @@ const Register = () => {
             })
             .catch(err => {
                 setRegError(err.message)
-                console.log(err);
             })
     }
-    const saveUser = (name, email) => {
-        const user = { name, email }
+    const handlegoogle = () => {
+        googleUser()
+            .then(result => {
+                const data = result.user
+                console.log(data);
+            })
+            .catch(err => console.error(err))
+    }
+    const saveUser = (name, email, role) => {
+        const user = { name, email, role }
+
         fetch(`${process.env.REACT_APP_API_URI}/users`, {
             method: 'POST',
             headers: {
@@ -46,8 +64,7 @@ const Register = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                navigate('/')
+                setNewUserEmail(email)
             })
     }
     return (
@@ -71,14 +88,26 @@ const Register = () => {
                             </div>
                             <div className="form-control mb-2">
                                 <div className="label">
+                                    <div className="text-lg">Your Role</div>
+                                </div>
+                                <select {...register('role')} className="select select-bordered w-full max-w-xs">
+                                    <option value='user'>User</option>
+                                    <option value='seller'>Seller</option>
+                                </select>
+                            </div>
+                            <div className="form-control mb-2">
+                                <div className="label">
                                     <div className="text-lg">Password</div>
                                 </div>
                                 <input type="password" {...register('password', { required: true })} className="input focus:outline-none" placeholder='Password' />
                             </div>
-                            {regError && <p className="py-3">{regError}</p>}
+                            {regError && <p className="py-3 font-semibold text-rose-800">{regError}</p>}
                             <button type='submit' className='btn btn-secondary w-full mt-4 text-lg'>register</button>
                         </form>
-                        <p className="text-center capitalize text-lg">new to Pcmart ? <Link to="/login" className=''><strong>register</strong></Link></p>
+                        <p className="text-center capitalize text-lg">already have an account ? <Link to="/login" className=''><strong>login</strong></Link></p>
+                        <div className="px-6">
+                            <button onClick={handlegoogle} type='button' className='btn btn-secondary font-bold btn-outline w-full mt-4  text-lg'> <FaGoogle className='mr-3' />  google</button>
+                        </div>
                     </div>
                 </div>
             </section>

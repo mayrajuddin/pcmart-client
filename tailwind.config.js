@@ -13,7 +13,7 @@ module.exports = {
         temtheme: {
           primary: '#F84248',
           secondary: '#232830',
-          ghost: '#969696'
+          ghost: '#969696',
         }
       }
     ],

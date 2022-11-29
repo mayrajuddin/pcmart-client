@@ -59,7 +59,7 @@ const AddProduct = () => {
     }
     return (
         <div>
-            <section className="p-6  text-gray-50">
+            <section className="p-6 bg-[#F8F8F8] text-gray-50">
                 <form onSubmit={handleSubmit(handleProductForm)} className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
                     <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900">
                         <div className="space-y-2 col-span-full lg:col-span-1">

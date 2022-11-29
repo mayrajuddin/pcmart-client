@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Spinner from '../../../Components/Spinner/Spinner';
 
 const AllUsers = () => {
-    const { data: users, isLoading } = useQuery({
+    const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_API_URI}/users`)
@@ -13,6 +14,22 @@ const AllUsers = () => {
     })
     if (isLoading) {
         return <Spinner />
+    }
+    if (users?.length < 1) {
+        return <p className='text-center 5xl font-bold'>no data</p>
+    }
+    const makeAdmin = id => {
+        fetch(`${process.env.REACT_APP_API_URI}/users/admin/${id}`, {
+            method: 'PUT',
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.upsertedCount > 0) {
+                    toast.success('Role changed succesfully')
+                    refetch()
+                }
+            })
     }
     return (
         <section className=''>
@@ -35,7 +52,7 @@ const AllUsers = () => {
                                 <td> {user.name} </td>
                                 <td> {user.email} </td>
                                 <td>Blue</td>
-                                <td>User</td>
+                                <td>{user?.role !== 'admin' && <button onClick={() => makeAdmin(user._id)} className='btn btn-xs btn-primary'> admin</button>}</td>
                             </tr>)
                         }
                     </tbody>

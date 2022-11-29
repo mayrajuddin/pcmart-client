@@ -10,7 +10,11 @@ const MyOrders = () => {
     const { data: bookings, isLoading } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
-            const res = await fetch(url)
+            const res = await fetch(url, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json()
             return data
         }
@@ -27,7 +31,7 @@ const MyOrders = () => {
                 {
                     bookings?.map(booking => <div key={booking._id} className="card card-side items-center bg-gray-100 shadow-xl h-44">
                         <figure><img src={booking?.image} alt="productimage" className='w-52 h-44' /></figure>
-                        <div className="card-body text-secondary">
+                        <div className="card-body text-secondary p-0 px-4">
                             <h2 className="card-title">{booking.modelName}</h2>
                             <p className='text-lg font-semibold capitalize'> Price : {booking.sellingPrice}</p>
                             <p>{booking.email}</p>
