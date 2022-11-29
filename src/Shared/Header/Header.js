@@ -13,9 +13,8 @@ const Header = () => {
     }
     const menuItems = <>
         <li><Link to="/" className='hover:bg-transparent focus:bg-transparent capitalize text-white hover:text-primary font-semibold rounded-md'>home</Link></li>
-        <li><Link to="/addproduct" className='hover:bg-transparent focus:bg-transparent capitalize text-white hover:text-primary font-semibold rounded-md'>add product</Link></li>
         <li><Link to="/blog" className='hover:bg-transparent focus:bg-transparent capitalize text-white hover:text-primary font-semibold rounded-md'>blog</Link></li>
-        <li><Link to="/dashboard" className='hover:bg-transparent focus:bg-transparent capitalize text-white font-semibold hover:text-primary rounded-md'>dashboard</Link></li>
+        {user?.uid && <li><Link to="/dashboard" className='hover:bg-transparent focus:bg-transparent capitalize text-white font-semibold hover:text-primary rounded-md'>dashboard</Link></li>}
 
     </>
     return (

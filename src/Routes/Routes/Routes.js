@@ -12,6 +12,8 @@ import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "../PrivateRoute/AdminRoute/AdminRoute";
 import DashboardHome from "../../Pages/Dashboard/DashboardHome/DashboardHome";
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
+import SellerRoute from "../SellerRoute/SellerRoute";
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -35,11 +37,6 @@ export const router = createBrowserRouter([
                 element: <Register />
             },
             {
-                path: '/addproduct',
-                element: <AddProduct />
-            },
-
-            {
                 path: '/category/:id',
                 element: <PrivateRoute><PostList /></PrivateRoute>,
                 loader: async ({ params }) => fetch(`http://localhost:8000/products/${params.id}`)
@@ -61,6 +58,14 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/alluser',
                 element: <AdminRoute><AllUsers /></AdminRoute>
+            },
+            {
+                path: '/dashboard/addproduct',
+                element: <SellerRoute><AddProduct /></SellerRoute>
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <SellerRoute><MyProducts /></SellerRoute>
             }
         ]
 
