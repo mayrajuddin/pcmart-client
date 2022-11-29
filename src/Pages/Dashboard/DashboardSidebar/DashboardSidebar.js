@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BiHomeAlt, BiUser, } from "react-icons/bi";
 import { authContext } from '../../../AuthContext/AuthProvider';
+import useAdmin from '../../../Hooks/useAdmin';
 
 const DashboardSidebar = () => {
     const { user, logOut } = useContext(authContext)
+    const [isAdmin] = useAdmin(user.email)
     const handleLogOut = () => {
         logOut()
             .then(() => { })
@@ -22,17 +24,27 @@ const DashboardSidebar = () => {
                 <div className="flex-1">
                     <ul className="pt-2 pb-4 space-y-1 text-sm capitalize">
                         <li className="rounded-sm">
+                            <Link to='/dashboard' className="flex items-center p-2 space-x-3 rounded-md">
+                                <BiHomeAlt size={24} />
+                                <span>overview</span>
+                            </Link>
+                        </li>
+                        <li className="rounded-sm">
                             <Link to='/' className="flex items-center p-2 space-x-3 rounded-md">
                                 <BiHomeAlt size={24} />
                                 <span>Home</span>
                             </Link>
                         </li>
-                        <li className="rounded-sm">
-                            <Link to="/dashboard/alluser" className="flex items-center p-2 space-x-3 rounded-md">
-                                <BiUser size={24} />
-                                <span>all user</span>
-                            </Link>
-                        </li>
+                        {isAdmin &&
+                            <>
+                                <li className="rounded-sm">
+                                    <Link to="/dashboard/alluser" className="flex items-center p-2 space-x-3 rounded-md">
+                                        <BiUser size={24} />
+                                        <span>all user</span>
+                                    </Link>
+                                </li>
+                            </>
+                        }
                         <li className="rounded-sm">
                             <a href="/" className="flex items-center p-2 space-x-3 rounded-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current dark:text-gray-400">
@@ -43,7 +55,7 @@ const DashboardSidebar = () => {
                             </a>
                         </li>
                         <li className="rounded-sm">
-                            <Link to='/dashboard' className="flex items-center p-2 space-x-3 rounded-md">
+                            <Link to='/dashboard/myorders' className="flex items-center p-2 space-x-3 rounded-md">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current dark:text-gray-400">
                                     <path d="M203.247,386.414,208,381.185V355.4L130.125,191H93.875L16,355.4v27.042l4.234,4.595a124.347,124.347,0,0,0,91.224,39.982h.42A124.343,124.343,0,0,0,203.247,386.414ZM176,368.608a90.924,90.924,0,0,1-64.231,26.413h-.33A90.907,90.907,0,0,1,48,369.667V362.6l64-135.112L176,362.6Z"></path>
                                     <path d="M418.125,191h-36.25L304,355.4v27.042l4.234,4.595a124.347,124.347,0,0,0,91.224,39.982h.42a124.343,124.343,0,0,0,91.369-40.607L496,381.185V355.4ZM464,368.608a90.924,90.924,0,0,1-64.231,26.413h-.33A90.907,90.907,0,0,1,336,369.667V362.6l64-135.112L464,362.6Z"></path>

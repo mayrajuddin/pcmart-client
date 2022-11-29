@@ -10,6 +10,8 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PostList from "../../Pages/PostList/PostList";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "../PrivateRoute/AdminRoute/AdminRoute";
+import DashboardHome from "../../Pages/Dashboard/DashboardHome/DashboardHome";
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -50,11 +52,15 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
+                element: <DashboardHome />
+            },
+            {
+                path: '/dashboard/myorders',
                 element: <MyOrders />
             },
             {
                 path: '/dashboard/alluser',
-                element: <AllUsers />
+                element: <AdminRoute><AllUsers /></AdminRoute>
             }
         ]
 

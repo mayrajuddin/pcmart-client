@@ -48,7 +48,7 @@ const Register = () => {
         googleUser()
             .then(result => {
                 const data = result.user
-                console.log(data);
+                saveUser(data.displayName, data.email)
             })
             .catch(err => console.error(err))
     }
