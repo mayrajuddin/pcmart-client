@@ -28,8 +28,8 @@ const Advertize = () => {
         return <Spinner />
     }
     return (
-        <section className='bg-gray-200 py-8 text-secondary'>
-            <div className="container mx-auto">
+        <section className=''>
+            {products.length > 0 && <div className="container mx-auto bg-gray-200 py-8 text-secondary">
                 <h2 className='text-2xl capitalize font-semibold py-4 '> Advertizes here</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
                     {
@@ -39,7 +39,7 @@ const Advertize = () => {
                     }
                 </div>
                 {selectProduct && <BookModal selectProduct={selectProduct} setSeletProduct={setSeletProduct} />}
-            </div>
+            </div>}
         </section>
     );
 };
