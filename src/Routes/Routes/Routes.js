@@ -14,11 +14,13 @@ import AdminRoute from "../PrivateRoute/AdminRoute/AdminRoute";
 import DashboardHome from "../../Pages/Dashboard/DashboardHome/DashboardHome";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import SellerRoute from "../SellerRoute/SellerRoute";
+import Wishlist from "../../Pages/Dashboard/Wishlist/Wishlist";
+import Error from "../../Pages/ErrorPage/Error";
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
-        errorElement: <div> page error</div>,
+        errorElement: <Error />,
         children: [
             {
                 path: '/',
@@ -39,7 +41,7 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <PrivateRoute><PostList /></PrivateRoute>,
-                loader: async ({ params }) => fetch(`http://localhost:8000/products/${params.id}`)
+                loader: async ({ params }) => fetch(`${process.env.REACT_APP_API_URI}/products/${params.id}`)
             }
         ]
     },
@@ -66,6 +68,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myproducts',
                 element: <SellerRoute><MyProducts /></SellerRoute>
+            },
+            {
+                path: '/dashboard/wishlist',
+                element: <Wishlist />
             }
         ]
 

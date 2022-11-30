@@ -38,7 +38,7 @@ const MyOrders = () => {
                         <div className="card-body text-secondary p-0 px-4">
                             <h2 className="card-title">{booking.modelName}</h2>
                             <p className='text-lg font-semibold capitalize'> Price : {booking.sellingPrice}</p>
-                            <p>{booking.email}</p>
+                            <p></p>
                             <div className="card-actions justify-end">
                                 <button className="btn btn-primary">pay</button>
                             </div>

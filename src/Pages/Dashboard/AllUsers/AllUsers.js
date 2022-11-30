@@ -3,6 +3,7 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import Spinner from '../../../Components/Spinner/Spinner';
 import { BiTrashAlt, } from "react-icons/bi";
+import { FaCheckCircle } from 'react-icons/fa';
 const AllUsers = () => {
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
@@ -43,6 +44,14 @@ const AllUsers = () => {
                 toast.success('user deleted succesfull')
             })
     }
+    const verifyUser = (id) => {
+        fetch(`${process.env.REACT_APP_API_URI}/verifyUser/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                toast.success('User Verified Successfull')
+            })
+    }
     return (
         <section className=''>
             <h3 className="font-bold text-4xl text-red-400 capitalize">all user</h3>
@@ -63,11 +72,11 @@ const AllUsers = () => {
                         {
                             users?.map((user, i) => <tr key={user._id} className='bg-slate-400 text-center'>
                                 <th>{i + 1}</th>
-                                <td> {user.name} </td>
+                                <td> <span className="flex items-center ">{user.name}  {user.verify && <FaCheckCircle className='text-sky-500 ml-2' />} </span></td>
                                 <td> {user.email} </td>
                                 <td>{user?.role}</td>
                                 <td>{user?.role !== 'admin' && <button onClick={() => makeAdmin(user._id)} className='btn btn-xs btn-primary'> make admin</button>}</td>
-                                <td>{user?.role !== 'seller' && <button className='btn btn-xs btn-primary'> verify user</button>}</td>
+                                <td>{user?.role !== 'seller' && !user?.verify && <button onClick={() => verifyUser(user._id)} className='btn btn-xs btn-primary'> verify user</button>}</td>
                                 <td> <button onClick={() => deleteUser(user._id)}><BiTrashAlt size={24} className='text-primary' /></button> </td>
                             </tr>)
                         }

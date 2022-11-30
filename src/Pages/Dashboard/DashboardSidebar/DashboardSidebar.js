@@ -74,7 +74,7 @@ const DashboardSidebar = () => {
                             </Link>
                         </li>
                         <li className="rounded-sm dark:bg-gray-800 dark:text-gray-50">
-                            <a href="/" className="flex items-center p-2 space-x-3 rounded-md">
+                            <a href="/dashboard/wishlist" className="flex items-center p-2 space-x-3 rounded-md">
                                 <BiHeart size={24} />
                                 <span>Wishlist</span>
                             </a>

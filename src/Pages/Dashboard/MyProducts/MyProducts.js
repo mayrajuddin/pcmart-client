@@ -8,6 +8,7 @@ import MyProductsCard from './MyProductsCard';
 const MyProducts = () => {
 
     const { user } = useContext(authContext)
+    console.log(user.email);
 
     const url = `${process.env.REACT_APP_API_URI}/sellerProducts?email=${user?.email}`;
 
@@ -23,7 +24,7 @@ const MyProducts = () => {
             return data
         }
     })
-
+    console.log(products);
     if (isLoading) {
         return <Spinner />
     }

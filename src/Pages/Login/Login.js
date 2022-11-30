@@ -7,9 +7,10 @@ import Spinner from '../../Components/Spinner/Spinner';
 import useToken from '../../Hooks/useToken';
 
 const Login = () => {
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm()
     const { loginUser, loading, googleUser } = useContext(authContext)
     const [loginEmail, setLoginEmail] = useState('')
+    const [err, setErr] = useState('')
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -23,22 +24,25 @@ const Login = () => {
 
     }
 
-    if (loading) {
-        return <Spinner />
-    }
-
     const handleLogin = data => {
+        if (loading) {
+            return <Spinner />
+        }
+        setErr('')
         const email = data.email
         const password = data.password
         loginUser(email, password)
             .then(result => {
+                setErr('')
                 setLoginEmail(email)
             })
             .catch(err => {
                 console.log(err);
+                setErr(err.message)
             })
 
     }
+
     const handleGoogle = () => {
         googleUser()
             .then(result => {
@@ -57,14 +61,17 @@ const Login = () => {
                                 <div className="label">
                                     <div className="text-lg">Email</div>
                                 </div>
-                                <input type="email" {...register('email', { required: true })} className="focus:outline-none input" placeholder='Your Email' />
+                                <input type="email" {...register('email', { required: 'email address required' })} className="focus:outline-none input" placeholder='Your Email' />
+                                {errors.email && <p>{errors.email?.message}</p>}
                             </div>
                             <div className="form-control mb-2">
                                 <div className="label">
                                     <div className="text-lg">Password</div>
                                 </div>
-                                <input type="password" {...register('password', { required: true })} className="focus:outline-none input" placeholder='Password' />
+                                <input type="password" {...register('password', { required: 'password required' })} className="focus:outline-none input" placeholder='Password' />
+                                {errors.password && <p>{errors.password?.message}</p>}
                             </div>
+                            {err && <p className='text-sm'>{err}</p>}
                             <button type='submit' className='btn btn-secondary w-full mt-4 text-lg'>Login</button>
                         </form>
                         <p className="text-center capitalize text-lg">new to Pcmart ? <Link to="/register" className=''><strong>register</strong></Link></p>

@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 import useToken from '../../Hooks/useToken';
 
 const Register = () => {
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm()
     const { createUser, updateUser, loading, googleUser } = useContext(authContext)
     const [regError, setRegError] = useState('')
     const navigate = useNavigate()
@@ -30,7 +30,8 @@ const Register = () => {
             .then(result => {
                 toast('user create succesfully')
                 const userInfo = {
-                    displayName: data.name
+                    displayName: data.name,
+                    photoURL: data.image
                 }
                 updateUser(userInfo)
                     .then(() => {
@@ -78,13 +79,22 @@ const Register = () => {
                                 <div className="label">
                                     <div className="text-lg">Name</div>
                                 </div>
-                                <input type="text" {...register('name', { required: true })} className="input focus:outline-none" placeholder='Your Name' />
+                                <input type="text" {...register('name', { required: 'Name is required' })} className="input focus:outline-none" placeholder='Your Name' />
+                                {errors.name && <p className='text-red-600 pt-2'> {errors.name?.message} </p>}
                             </div>
                             <div className="form-control mb-2">
                                 <div className="label">
                                     <div className="text-lg">Email</div>
                                 </div>
-                                <input type="email" {...register('email', { required: true })} className="input focus:outline-none" placeholder='Your Email' />
+                                <input type="email" {...register('email', { required: 'email is required' })} className="input focus:outline-none" placeholder='Your Email' />
+                                {errors.email && <p className='text-red-600 pt-2'> {errors.email?.message} </p>}
+                            </div>
+                            <div className="form-control mb-2">
+                                <div className="label">
+                                    <div className="text-lg">Email</div>
+                                </div>
+                                <input type="text" {...register('image', { required: 'image is required' })} className="input focus:outline-none" placeholder='photo URL' />
+                                {errors.image && <p className='text-red-600 pt-2'> {errors.image?.message} </p>}
                             </div>
                             <div className="form-control mb-2">
                                 <div className="label">
@@ -99,7 +109,8 @@ const Register = () => {
                                 <div className="label">
                                     <div className="text-lg">Password</div>
                                 </div>
-                                <input type="password" {...register('password', { required: true })} className="input focus:outline-none" placeholder='Password' />
+                                <input type="password" {...register('password', { required: 'password is required' })} className="input focus:outline-none" placeholder='Password' />
+                                {errors.password && <p className='text-red-600 pt-2'> {errors.password?.message} </p>}
                             </div>
                             {regError && <p className="py-3 font-semibold text-rose-800">{regError}</p>}
                             <button type='submit' className='btn btn-secondary w-full mt-4 text-lg'>register</button>

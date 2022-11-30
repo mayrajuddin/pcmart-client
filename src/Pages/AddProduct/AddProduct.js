@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { authContext } from '../../AuthContext/AuthProvider';
 import Spinner from '../../Components/Spinner/Spinner';
 
@@ -13,6 +14,7 @@ const AddProduct = () => {
     })
     const { loading, user } = useContext(authContext)
     const { register, handleSubmit } = useForm()
+    const navigate = useNavigate()
 
     if (loading) {
         return <Spinner />
@@ -54,6 +56,7 @@ const AddProduct = () => {
                             secondary: '#fff',
                         },
                     });
+                    navigate('/dashboard/myproducts')
                 }
             })
     }
@@ -62,10 +65,10 @@ const AddProduct = () => {
             <section className="text-gray-50">
                 <form onSubmit={handleSubmit(handleProductForm)} className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
                     <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-900">
-                        <div className="space-y-2 col-span-full lg:col-span-1">
+                        <div className="space-y-2 col-span-full">
                             <p className="font-semibold text-xl text-center">Add your product</p>
                         </div>
-                        <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                        <div className="grid grid-cols-6 gap-4 col-span-full">
                             <div className="col-span-full sm:col-span-3">
                                 <label htmlFor="firstname" className="text-sm">Model Name</label>
                                 <input {...register('name')} name='name' id="firstname" type="text" placeholder="Model name" className="w-full input rounded-md focus:outline-none text-gray-900" />
@@ -81,14 +84,14 @@ const AddProduct = () => {
                             <div className="col-span-full sm:col-span-3">
                                 <label className="text-sm">Brand Name</label>
                                 <select {...register('brand')} className="select select-bordered w-full focus:outline-none text-gray-900">
-                                    {data.map(bName => (
+                                    {data?.map(bName => (
                                         <option key={bName._id} className='text-gray-900' value={bName.brandName}>{bName.brandName}</option>
                                     ))}
                                 </select>
                             </div>
                             <div className="col-span-full">
                                 <label htmlFor="address" className="text-sm">Image URL</label>
-                                <input {...register('image')} id="address" type="text" placeholder="image URL" className="w-full input rounded-md focus:outline-none text-gray-900" />
+                                <input {...register('image')} id="address" type="url" placeholder="image URL" className="w-full input rounded-md focus:outline-none text-gray-900" />
                             </div>
                             <div className="col-span-full sm:col-span-3">
                                 <label htmlFor="sell" className="text-sm">Sell Price</label>
