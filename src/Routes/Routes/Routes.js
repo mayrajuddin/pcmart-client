@@ -16,6 +16,7 @@ import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import SellerRoute from "../SellerRoute/SellerRoute";
 import Wishlist from "../../Pages/Dashboard/Wishlist/Wishlist";
 import Error from "../../Pages/ErrorPage/Error";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -72,6 +73,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/wishlist',
                 element: <Wishlist />
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment />,
+                loader: ({ params }) => fetch(`${process.env.REACT_APP_API_URI}/bookings/${params.id}`)
             }
         ]
 

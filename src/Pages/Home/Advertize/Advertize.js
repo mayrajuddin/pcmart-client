@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Spinner from '../../../Components/Spinner/Spinner';
 import AdvertizeCard from './AdvertizeCard';
+import BookModal from './BookModal';
 
 const Advertize = () => {
 
@@ -20,6 +21,7 @@ const Advertize = () => {
             return data
         }
     })
+    const [selectProduct, setSeletProduct] = useState(null)
     const wishlist = () => toast.error('wishlist not set')
 
     if (isLoading) {
@@ -31,9 +33,12 @@ const Advertize = () => {
                 <h2 className='text-2xl capitalize font-semibold py-4 '> Advertizes here</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
                     {
-                        products?.map(product => <AdvertizeCard key={product._id} product={product} wishlist={wishlist} />)
+                        products?.map(product => <AdvertizeCard key={product._id}
+                            product={product} wishlist={wishlist}
+                            setSeletProduct={setSeletProduct} />)
                     }
                 </div>
+                {selectProduct && <BookModal selectProduct={selectProduct} setSeletProduct={setSeletProduct} />}
             </div>
         </section>
     );

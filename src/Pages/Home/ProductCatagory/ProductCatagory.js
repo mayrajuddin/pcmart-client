@@ -21,9 +21,9 @@ const ProductCatagory = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 justify-center">
                         {
                             catagory.map(cat => (
-                                <Link to={`/category/${cat._id}`} key={cat._id}>
-                                    <div className="card items-end  bg-base-100 shadow-xl image-full max-h-64 w-96 mx-auto sm:w-auto">
-                                        <figure><img src={cat.img} alt="Shoes" className='w-full max-h-64 ' /></figure>
+                                <Link to={`/category/${cat._id}`} key={cat._id} className=''>
+                                    <div className="card items-end  bg-base-100 shadow-xl image-full h-64 w-96 mx-auto sm:w-auto">
+                                        <figure><img src={cat.img} alt="Shoes" className='w-full h-64 ' /></figure>
                                         <div className="card-body items-center">
                                             <h2 className="text-center text-2xl uppercase text-white font-bold">{cat.brandName}</h2>
                                         </div>

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { authContext } from '../../AuthContext/AuthProvider';
+import { authContext } from '../../../AuthContext/AuthProvider';
 
-const BookingModal = ({ selectProduct, setSeletProduct }) => {
+const BookModal = ({ selectProduct, setSeletProduct }) => {
     const { name, sellPrice, location, image } = selectProduct
     const { user } = useContext(authContext)
 
@@ -16,7 +16,6 @@ const BookingModal = ({ selectProduct, setSeletProduct }) => {
         const sellingPrice = sellPrice
         const pickupLocation = data.pickupLocation
         const buyerContact = data.buyerContact
-
 
         const ProductDetails = {
             modelName: name,
@@ -48,10 +47,10 @@ const BookingModal = ({ selectProduct, setSeletProduct }) => {
     }
     return (
         <>
-            <input type="checkbox" id="booking-modal" className="modal-toggle" />
+            <input type="checkbox" id="bookModal" className="modal-toggle" />
             <div className="modal backdrop-blur-sm ">
                 <div className="modal-box relative text-secondary bg-zinc-100">
-                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2 btn-primary">✕</label>
+                    <label htmlFor="bookModal" className="btn btn-sm btn-circle absolute right-2 top-2 btn-primary">✕</label>
                     <h3 className="text-lg font-bold  mb-2 pb-3 border-b border-b-gray-300">{name}</h3>
 
                     <form onSubmit={handleSubmit(handleBookigForm)}>
@@ -84,4 +83,4 @@ const BookingModal = ({ selectProduct, setSeletProduct }) => {
     );
 };
 
-export default BookingModal;
+export default BookModal;

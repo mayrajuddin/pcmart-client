@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { } from 'react';
 import { BiHeart, } from "react-icons/bi";
 import { FaCheckCircle } from 'react-icons/fa';
-const AdvertizeCard = ({ product, wishlist }) => {
+const AdvertizeCard = ({ product, wishlist, setSeletProduct }) => {
     const { image, officialPrice, sellPrice, usesTime, name, sellerName, verify } = product
     return (
         <div className="card w-96 bg-base-100 shadow-xl mx-auto text-secondary font-mono">
@@ -19,7 +19,7 @@ const AdvertizeCard = ({ product, wishlist }) => {
                 </span>
                 <div className="card-actions justify-between items-center pt-2">
                     <div className=""><button onClick={wishlist} className='btn btn-sm btn-primary btn-outline'> <BiHeart className='mr-2' /> wishlist</button></div>
-                    <div className="text-primary"><button className='btn btn-sm  btn-primary'>book now</button></div>
+                    <div className="text-primary"><label onClick={() => setSeletProduct(product)} htmlFor="bookModal" className=' btn btn-sm  btn-primary'>book now</label></div>
                 </div>
             </div>
         </div>
