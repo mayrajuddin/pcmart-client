@@ -3,10 +3,9 @@ import React from 'react';
 const PostCard = ({ post, setSeletProduct }) => {
     const { brand, name, location, image, officialPrice, sellPrice, usesTime, sellerName, createAt } = post
 
-
     return (
         <div className="flex flex-col max-w-lg p-6 mx-auto space-y-6 overflow-hidden rounded-lg hover:shadow-lg bg-gray-900 text-gray-300">
-            <div className="flex space-x-4 justify-between">
+            <div className="flex space-x-3 justify-between">
                 <div className="flex flex-col space-y-1">
                     <p className="text-sm font-semibold">Seller Name : {sellerName}</p>
                     <span className="text-xs dark:text-gray-400">{createAt}</span>
