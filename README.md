@@ -18,7 +18,7 @@ adminPassword: <your admin password  121121>
 ## About The App
 * If anyone want to sell old computer this app is useful for him/her 
 * User Can Login & Register 
-* User Can Buy any computer Form catagory  ! if anyone want to buy computer user have to login first 
+* User Can Buy any computer Form catagory ! if anyone want to buy computer user have to login first 
 * user can create account via google  and email
 * user can register with image and display name
 * user can access product via category
@@ -26,7 +26,7 @@ adminPassword: <your admin password  121121>
 
 ## Screenshots
 
-![image](https://i.ibb.co/CvVJ596/screencapture-localhost-3000-2022-11-11-23-18-28.png)
+![image]()
 
 ## Technologies
 I used `React js`, `Tailwind`, `DaisyUI`, `JWT`, `React Icons` , `firebase`, `reack router dom, tanStack Query, React Form Hook, Mamba UI , `
