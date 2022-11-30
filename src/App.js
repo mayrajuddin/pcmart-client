@@ -4,7 +4,6 @@ import './App.css';
 import { router } from './Routes/Routes/Routes';
 
 function App() {
-  // https://new-ella-demo.myshopify.com/
   return (
     <div>
       <RouterProvider router={router} />

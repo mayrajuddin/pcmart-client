@@ -10,7 +10,7 @@ const Footer = () => {
                     <div className="lg:w-1/3">
                         <Link to="/" className="flex justify-center space-x-3 lg:justify-start">
                             <div className="flex items-center justify-center w-12 h-12 rounded-full">
-                                <FaInstagram size={22} />
+                                <img src="https://i.ibb.co/JqFGdSV/favicon-16x16.png" alt="" />
                             </div>
                             <span className="self-center text-2xl font-semibold uppercase">pcmart</span>
                         </Link>
