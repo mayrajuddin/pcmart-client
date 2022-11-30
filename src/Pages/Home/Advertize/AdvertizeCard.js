@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MyProductsCard = ({ product, deleteProduct }) => {
+const AdvertizeCard = ({ product }) => {
     const { image, officialPrice, sellPrice, usesTime, name } = product
     return (
         <div className="card lg:w-96 bg-base-100 shadow-xl mx-auto text-secondary font-mono">
@@ -14,11 +14,11 @@ const MyProductsCard = ({ product, deleteProduct }) => {
                 <p>duration : {usesTime}</p>
                 <div className="card-actions justify-end">
                     <div className="badge badge-outline"><button>Advertized</button></div>
-                    <div className="badge badge-outline text-primary"><button onClick={() => deleteProduct(product._id)}>Delete</button></div>
+                    <div className="badge badge-outline text-primary"><button >Delete</button></div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default MyProductsCard;
+export default AdvertizeCard;

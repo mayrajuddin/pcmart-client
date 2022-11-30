@@ -34,6 +34,15 @@ const AllUsers = () => {
                 }
             })
     }
+    const deleteUser = id => {
+        fetch(`${process.env.REACT_APP_API_URI}/users/${id}`, {
+            method: 'DELETE',
+        }).then(res => res.json())
+            .then(data => {
+                refetch()
+                toast.success('user deleted succesfull')
+            })
+    }
     return (
         <section className=''>
             <h3 className="font-bold text-4xl text-red-400 capitalize">all user</h3>
@@ -59,7 +68,7 @@ const AllUsers = () => {
                                 <td>{user?.role}</td>
                                 <td>{user?.role !== 'admin' && <button onClick={() => makeAdmin(user._id)} className='btn btn-xs btn-primary'> make admin</button>}</td>
                                 <td>{user?.role !== 'seller' && <button className='btn btn-xs btn-primary'> verify user</button>}</td>
-                                <td> <button><BiTrashAlt size={24} className='text-primary' /></button> </td>
+                                <td> <button onClick={() => deleteUser(user._id)}><BiTrashAlt size={24} className='text-primary' /></button> </td>
                             </tr>)
                         }
                     </tbody>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { BiBookOpen, BiHeart, BiHomeAlt, BiShoppingBag, BiUser, } from "react-icons/bi";
+import { BiBookOpen, BiFolder, BiHeart, BiHomeAlt, BiShoppingBag, BiUser, } from "react-icons/bi";
 import { authContext } from '../../../AuthContext/AuthProvider';
 import useAdmin from '../../../Hooks/useAdmin';
 import useSeller from '../../../Hooks/useSeller';
@@ -54,6 +54,12 @@ const DashboardSidebar = () => {
                                         <BiShoppingBag size={24} />
                                         <span>my products</span>
                                     </Link>
+                                </li>
+                                <li className="rounded-sm dark:bg-gray-800 dark:text-gray-50">
+                                    <a href="/dashboard/addproduct" className="flex items-center p-2 space-x-3 rounded-md">
+                                        <BiFolder size={24} />
+                                        <span>add product</span>
+                                    </a>
                                 </li>
                             </>
                         }

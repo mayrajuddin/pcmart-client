@@ -22,7 +22,11 @@ const MyOrders = () => {
     if (isLoading) {
         return <Spinner />
     }
-
+    if (bookings?.length === 0) {
+        return <div className='text-2xl text-center my-8 '>
+            <h2 className="text-primary text-medium capitalize">No Orders  Found</h2>
+        </div>
+    }
     return (
 
         <section className=''>
