@@ -27,16 +27,16 @@ const CheckOutForm = () => {
         }
     }
     return (
-        <div className='w-1/3'>
+        <div className='w-1/3 bg-slate-700 p-6 shadow-md'>
             <form onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {
                             base: {
                                 fontSize: '16px',
-                                color: '#232830',
+                                color: '#fff',
                                 '::placeholder': {
-                                    color: '#232830',
+                                    color: '#fff',
                                 },
                             },
                             invalid: {

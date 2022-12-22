@@ -12,8 +12,8 @@ const Payment = () => {
     console.log(' booking', booking);
     return (
         <div>
-            payment
-            <div>
+            <p className="text-xl capitalize text-black py-4">payment</p>
+            <div className=''>
                 <Elements stripe={stripePromise}>
                     <CheckOutForm />
                 </Elements>
