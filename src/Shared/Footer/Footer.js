@@ -9,12 +9,12 @@ const Footer = () => {
                 <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
                     <div className="lg:w-1/3">
                         <Link to="/" className="flex justify-center space-x-3 lg:justify-start">
-                            <div className="flex items-center justify-center w-12 h-12 rounded-full">
-                                <img src="https://i.ibb.co/JqFGdSV/favicon-16x16.png" alt="" />
+                            <div className="flex items-center justify-center rounded-full">
+                                <img src="https://i.ibb.co/fpm4vNG/video-lesson.png" alt="" className='w-12 h-12' />
                             </div>
                             <span className="self-center text-2xl font-semibold uppercase">pcmart</span>
                         </Link>
-                        <p className='text-lg capitalize '>find your best laptop on pc mart</p>
+                        <p className='text-lg capitalize mt-2'>find your best laptop on pc mart</p>
                     </div>
                     <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
                         <div className="space-y-3">

@@ -28,9 +28,9 @@ const Advertize = () => {
         return <Spinner />
     }
     return (
-        <section className=''>
-            {products.length > 0 && <div className="container mx-auto bg-gray-200 py-8 text-secondary">
-                <h2 className='text-2xl capitalize font-semibold py-4 '> Advertizes here</h2>
+        <section className='bg-gray-200'>
+            {products.length > 0 && <div className="container mx-auto  py-8 text-secondary">
+                <h2 className='text-2xl capitalize font-semibold p-4'> Advertizes Products</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
                     {
                         products?.map(product => <AdvertizeCard key={product._id}
